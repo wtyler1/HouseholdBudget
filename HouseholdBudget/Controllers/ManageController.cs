@@ -15,6 +15,8 @@ namespace HouseholdBudget.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationUser user = new ApplicationUser();
 
         public ManageController()
         {
@@ -105,7 +107,39 @@ namespace HouseholdBudget.Controllers
         {
             return View();
         }
+        // Get: Change Name
+        public ActionResult ChangeName()
+        {
+            //Find the Login user string
+            var userId = User.Identity.GetUserId();
+            //Goes to the User table and Find the userId that matches
+            var user = db.Users.Find(userId);
 
+            var ChangeName = new ChangeNameView();
+            ChangeName.FirstName = user.FirstName;
+            ChangeName.LastName = user.LastName;
+            return View(ChangeName);
+        }
+
+
+        // Post: ChangeName
+        [HttpPost]
+        public ActionResult ChangeName(ChangeNameView model)
+        {
+
+            //Find the Login user string
+            var userId = User.Identity.GetUserId();
+            //Goes to the User table and Find the userId that matches
+            var user = db.Users.Find(userId);
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.FullName = model.FirstName + " " + model.LastName;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
         //
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
