@@ -1,0 +1,30 @@
+﻿@model HouseholdBudget.Models.Household
+
+<h2>Members</h2>
+ List a member in this house 
+<table class="table">
+    <tr>
+        <th>
+            Household Members
+        </th>
+        <th></th>
+    </tr>
+
+   
+        <tr>
+            <td>
+              <b>Household Name: </b> @Html.DisplayFor(item => item.Name)
+            </td>
+            @foreach (var members in Model.User)
+            {
+                <tr>
+            <td>
+            @Html.DisplayFor(member => members.FullName)
+                
+            </td> 
+          </tr> 
+            }
+        </tr>
+    
+
+</table>

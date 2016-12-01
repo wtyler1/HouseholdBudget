@@ -11,7 +11,7 @@ namespace HouseholdBudget.Models
         public int HouseholdId { get; set; }
         public string Name { get; set; }
         public decimal Balance { get; set; }
-        public string ReconciledBalance { get; set; }
+        public decimal ReconciledBalance { get; set; }
 
         public Account()
         {

@@ -13,7 +13,7 @@ namespace HouseholdBudget.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }
-        public int? HouseholdId { get; set; }
+        public int? householdId { get; set; }
         public ApplicationUser()
         {
             this.Transactions = new HashSet<Transaction>();

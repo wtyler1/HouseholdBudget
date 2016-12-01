@@ -64,10 +64,22 @@ namespace HouseholdBudget.Models
 
     public class RegisterViewModel
     {
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        //First Name
+        [Required]
+        [StringLength(20, ErrorMessage = "Enter your First Name", MinimumLength = 1)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        //Last Name
+        [Required]
+        [StringLength(20, ErrorMessage = "Enter your Last Name", MinimumLength = 1)]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

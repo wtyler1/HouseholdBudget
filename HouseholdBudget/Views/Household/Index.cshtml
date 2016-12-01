@@ -1,0 +1,69 @@
+﻿@model HouseholdBudget.Models.Household
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>HouseHold</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Household
+        </th>
+        <th>
+            Household Members
+        </th>
+        <th></th>
+    </tr>
+
+
+    <tr>
+    <td>
+        @Html.DisplayFor(house => house.Name)
+    </td>
+    @foreach (var members in Model.User)
+    {
+
+        <td>
+            @Html.DisplayFor(member => members.FirstName)
+            </td>
+    }
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = Model.Id }) |
+         @using (Html.BeginForm("Leave","Household", FormMethod.Post))
+         {   @Html.AntiForgeryToken()
+             @Html.ActionLink("Leave", "Leave")
+         }
+        </td>
+    </tr>
+
+
+</table>
+
+<h2>Invite</h2>
+<p>Invite another user to join your household</p>
+<div class="form-group">
+   @using (Html.BeginForm("Invitation", "Household", FormMethod.Post))
+   { @Html.AntiForgeryToken()
+      
+       @Html.HiddenFor(HouseId => HouseId.Id)
+       @Html.HiddenFor(HouseName => HouseName.Name)
+    <div class="col-md-2">
+        @Html.DisplayFor(model=>model.Name)
+        </div>
+        <div class="col-md-10">
+            @Html.TextBox("Email", null, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+              <input type="submit" class="btn btn-default" value="Invite" />
+            </div>
+        </div> 
+       
+   }
+    </div>
